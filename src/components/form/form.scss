@@ -1,0 +1,44 @@
+$border-radius: 10px;
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 10px 5px #00000029;
+  & > * {
+    display: block;
+  }
+}
+
+.join-form__input {
+  padding: 1rem;
+  border-radius: $border-radius;
+  border: 2px solid #5a5a5a7a;
+  outline: none;
+  &:focus {
+    border-color: #3846aa;
+  }
+}
+
+.join-form__input--error {
+  border-color: red;
+}
+
+.join-form__button {
+  letter-spacing: 1px;
+  margin: auto;
+  background-color: inherit;
+  color: #3846aa;
+  border: 2px solid #3846aa;
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius;
+  box-shadow: 0px 0px 1px 1px #0000000e;
+  transition: 0.3s;
+  &:hover {
+    color: white;
+    background-color: #3846aa;
+  }
+}

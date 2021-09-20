@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.scss";
+import Form from "./components/form/form";
+import Chat from "./components/chat/chat";
+import { useState } from "react";
 function App() {
+  const [access, setAccess] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [roomName, setRoomName] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <main className="main">
+      <header>
+        <h1>Let`s chat</h1>
       </header>
-    </div>
+      {!access && (
+        <Form
+          setUserName={setUserName}
+          setAccess={setAccess}
+          setRoomName={setRoomName}
+          className="content"
+        ></Form>
+      )}
+      {access && (
+        <Chat
+          roomName={roomName}
+          userName={userName}
+          className="content"
+        ></Chat>
+      )}
+    </main>
   );
 }
 
