@@ -4,17 +4,15 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import InputEmoji from "react-input-emoji";
 import "./chat.scss";
 
-let socket;
-
+let socket = io.connect("https://react-chat-web.herokuapp.com/");
 const Chat = ({ className, roomName, userName }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-  const ENDPOINT = "https://react-chat-web.herokuapp.com/";
 
   useEffect(() => {
-    socket = io(ENDPOINT);
     socket.emit("join", { userName, roomName }, () => {});
+
     return () => {
       socket.emit("disconnect");
       socket.off();
@@ -23,12 +21,13 @@ const Chat = ({ className, roomName, userName }) => {
 
   useEffect(() => {
     socket.on("message", (message) => {
-      setMessages([...messages, message]);
+      console.log("out");
+      setMessages((messages) => [...messages, message]);
     });
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
-  }, [messages]);
+  }, [socket]);
 
   const sendMessage = () => {
     if (message) {
@@ -50,7 +49,7 @@ const Chat = ({ className, roomName, userName }) => {
         {messages.map((item) => {
           return (
             <p
-              key={item.text}
+              key={Math.random()}
               className={`text ${
                 item.user === userName ? "user-text" : "friend-text"
               }`}
